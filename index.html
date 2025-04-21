@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jejak Prestasi</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Raleway&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-logo">
+        <span class="logo-icon">🎖️</span> <span class="logo-text">JEPRES</span>
+      </div>
+      <ul class="navbar-menu">
+        <li><a href="#" onclick="showSection('loginSection')">📋 Cek Data</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <!-- Form Section -->
+    <div id="formSection" class="active-section">
+      <h1>🎓 Jejak Prestasi</h1>
+      <form id="alumniForm">
+        <h2>Tambah Prestasi</h2>
+        <input type="text" id="nama" placeholder="Nama" required />
+        <input type="number" id="angkatan" placeholder="Angkatan" required />
+        <input type="text" id="prestasi" placeholder="Judul Prestasi" required />
+        <textarea id="deskripsi" placeholder="Deskripsi Prestasi" required></textarea>
+        <input type="date" id="tanggal" required />
+        <input type="file" id="sertifikat" accept=".pdf,image/*" required />
+        <button type="submit">Tambah Prestasi</button>
+      </form>
+    </div>
+
+    <!-- Login Section -->
+    <div id="loginSection" class="hidden">
+      <h2>🔐 Login untuk melihat prestasi</h2>
+      <input type="text" id="username" placeholder="Username" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <button onclick="prosesLogin()">Login</button>
+    </div>
+
+    <!-- Daftar Prestasi Section -->
+    <div id="daftarSection" class="hidden">
+      <h2 id="judulDaftar" style="display: none;">Daftar Prestasi Alumni</h2>
+      <div id="daftarPrestasi"></div>
+      <button onclick="showSection('formSection')" class="back-btn">⬅ Kembali</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    function showSection(id) {
+      document.getElementById('formSection').classList.add('hidden');
+      document.getElementById('loginSection').classList.add('hidden');
+      document.getElementById('daftarSection').classList.add('hidden');
+      document.getElementById(id).classList.remove('hidden');
+    }
+
+    function prosesLogin() {
+      const user = document.getElementById('username').value;
+      const pass = document.getElementById('password').value;
+
+      const usernameBenar = "admin";
+      const passwordBenar = "1234";
+
+      if (user === usernameBenar && pass === passwordBenar) {
+        showSection('daftarSection');
+        renderPrestasi();
+      } else {
+        alert("Username atau password salah!");
+      }
+    }
+
+    // Efek ripple klik
+    document.addEventListener('click', function (e) {
+      const ripple = document.createElement('div');
+      ripple.className = 'ripple';
+      ripple.style.left = `${e.clientX}px`;
+      ripple.style.top = `${e.clientY}px`;
+      ripple.style.position = 'absolute';
+      ripple.style.zIndex = 9999;
+      document.body.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 600);
+    });
+  </script>
+  <footer class="footer">
+    <p>&copy; Hak Cipta - WEBINIMAL | anotherbysav | Mahasiswa 001</p>
+  </footer>
+  
+</body>
+</html>
